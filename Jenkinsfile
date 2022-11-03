@@ -47,8 +47,10 @@ pipeline{
             stage('Upload WAR file to Nexus'){
             steps{
                 script{
+
                         def readPomVersion = readMavenPom file: 'pom.xml'
-                        def nexusRepo = readMavenPom.version.endsWith("SNAPSHOT") ? "demoapp-snapshot" : "demoapp-release"
+
+                        def nexusRepo = readPomVersion.version.endsWith("SNAPSHOT") ? "demoapp-snapshot" : "demoapp-release"
                        
                         nexusArtifactUploader artifacts: 
                         [
@@ -57,6 +59,7 @@ pipeline{
                                 classifier: '', file: 'target/Uber.jar', 
                                 type: 'jar'
                                 ]
+                    
                             ], 
                             credentialsId: 'nexus-auth', 
                             groupId: 'com.example', 
