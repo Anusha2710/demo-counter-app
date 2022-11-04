@@ -89,10 +89,11 @@ pipeline{
                     script{
 
                         withCredentials([string(credentialsId: 'docker-hub', variable: 'docker-hub')]) {
-                            sh 'docker login -u anushamaddela1997 -p ${docker-hub'}
+                            
+                            sh 'docker login -u anushamaddela1997 -p ${docker-hub}'
                             sh 'docker image push anushamaddela1997/$JOB_NAME:v1.$BUILD_ID'
-                            sh 'docker image push anushamaddela1997/$JOB_NAME:latest
-    
+                            sh 'docker image push anushamaddela1997/$JOB_NAME:latest'
+
     
                     }
                     }
